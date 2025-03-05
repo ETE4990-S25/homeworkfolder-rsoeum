@@ -6,18 +6,22 @@ class Person:
         self.age=age
         self.email =email
 
-def to_dict(self):
-    return {
+    def to_dict(self):
+        return {
         "name": self.name,
         "age": self.age,
         "email": self.email
     }
-    
+
 class Student(Person):
     def __init__(self, name, age, email, StudentId):
         super().__init__(name,age,email)
         self.StudentId=StudentId
 
+def to_dict(self):
+    data =super().to_dict()
+    data["StudentId"]= self.StudentId
+    return data
 
     def Json(self):
         return json.dumps(self.to_dict(), indent=4)
