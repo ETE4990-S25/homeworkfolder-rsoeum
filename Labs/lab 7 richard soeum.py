@@ -51,9 +51,6 @@ def find_duplicates(directory):
         print("no dupes files found")
     
 
-    # use a dictionary to store file names and paths
-    # compare files with the same name
-
 def get_checksum(file_path):
 
     hash_obj = hashlib.md5()  # Change to hashlib.sha256() if desired
