@@ -2,6 +2,9 @@
 import threading
 import time
 import math
+import sys
+
+sys.set_int_max_str_digits(100000000000)# fib and fac were too large 
 
 
 
@@ -30,7 +33,7 @@ def get_highest_prime():
         num+=1
     with lock:
         results["prime"]=highest
-    print(highest)
+    print(f"highest prime found :{highest}", flush=True)
 
 def fibonacci():
     while results["prime"]==0:
@@ -39,30 +42,24 @@ def fibonacci():
     a, b = 0, 1
     for _ in range(n):
         a, b = b, a + b
-        if b > 1e8:
-            results["fibonacci"] = " fib is Too large"
-            return
     results["fibonacci"] = a
-    print(f"Fibonacci({n}) = {a}")
+    print(f"Fibonacci({n}) = {str(a)[:100]}... (total {len(str(a))} digits)", flush=True)
+
 
 def factorial(n):
     return math.factorial(n)
 
-def get_factorial():
+def run_factorial():
     while results["prime"] == 0:
         time.sleep(0.1)
 
     n = results["prime"]
     try:
         result = factorial(n) 
-        if result > 1e12:
-            results["factorial"] = " fac is Too large"
-            return
         results["factorial"] = result
-        print(f"Factorial({n}) = {result}")
+        print(f"Factorial({n}) = {str(result)[:100]}... (total {len(str(result))} digits)", flush=True)
     except OverflowError:
-        results["factorial"] = "Overflow"
-
+        results["factorial"]="overflow"
 
     
         
@@ -70,15 +67,14 @@ def get_factorial():
 if __name__ == '__main__':
     t=threading.Thread(target=get_highest_prime)
     tfib=threading.Thread(target=fibonacci)
-    tfact=threading.Thread(target=get_factorial)
+    tfact=threading.Thread(target=run_factorial)
     t.start()
-    t.join()
-
     tfib.start()
-    tfib.join()
-
     tfact.start()
+    t.join()
+    tfib.join()
     tfact.join()
+
     print(results["prime"])
     print(results["fibonacci"])
     print(results["factorial"])
