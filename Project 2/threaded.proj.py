@@ -27,7 +27,7 @@ def get_highest_prime():
     start_time=time.time()
     num=0
     highest=0
-    while time.time()-start_time<5:
+    while time.time()-start_time<180: #look for 3 minutes
         if is_prime(num):
             highest=num
         num+=1

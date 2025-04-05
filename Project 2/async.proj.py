@@ -3,7 +3,7 @@ import time
 import math
 import sys
 
-sys.set_int_max_str_digits(100000)# fib and fac were too large 
+sys.set_int_max_str_digits(1000000000)# fib and fac were too large 
 
 def is_prime(n):
     if n <= 1:
@@ -13,7 +13,9 @@ def is_prime(n):
             return False
     return True
 
-
+results= {"prime": 0,
+            "fibonacci": 0,
+            "factorial": 0}
 
 async def get_highest_prime():
     start_time=time.time()
@@ -29,9 +31,7 @@ async def get_highest_prime():
     print(f"highest prime: {highest}")
 
 
-results= {"prime": 0,
-            "fibonacci": 0,
-            "factorial": 0}
+
 
 async def factorial(n):
     result=math.factorial(n)
@@ -54,14 +54,20 @@ async def fibonacci(n):
 
 
 async def main():
-    fib_n = 100000
-    fact_n = 10000 
+    await get_highest_prime()
+    prime=results["prime"]
     await asyncio.gather(
-        get_highest_prime(),
-        fibonacci(fib_n),
-        factorial(5000)
+        fibonacci(prime),
+        factorial(prime)
     )
-    print(results)
+    print("highest prime:", results["prime"])
+    print("fibonacci:" ,results["fibonacci"])
+    print("factorial:" ,results["factorial"])
 
 if __name__ == "__main__":
     await main()
+
+
+
+
+    #laptop was about to explode lol
