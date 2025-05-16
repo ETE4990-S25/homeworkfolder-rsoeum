@@ -13,11 +13,7 @@ import calendar
 LOG_FILE = 'logs/quest1_random.log'
 DATA_DIR = 'data_random'
 THREAD_POOL_SIZE = 10
-ALL_CURRENCIES = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "USD", "NZD", "SEK", "NOK",
-                  "DKK", "TRY", "RUB", "MXN", "SGD", "HKD", "THB", "ZAR", "KRW", "HUF",
-                  "PLN", "BRL", "CNY", "INR", "IDR", "PHP", "MYR", "RON", "ILS", "SAR",
-                  "AED", "KWD", "BHD", "CZK", "SKK", "HRK", "BGN", "LTL", "LVL", "EEK",
-                  "ISK", "XAU", "XAG"]
+ALL_CURRENCIES =  ["EUR", "GBP", "USD", "DZD", "AUD", "BWP", "BND", "CAD", "CLP", "CNY", "COP", "CZK", "DKK", "HUF", "ISK", "INR", "IDR", "ILS", "KZT", "KRW", "KWD", "LYD", "MYR", "MUR", "NPR", "NZD", "NOK", "OMR", "PKR", "PLN", "QAR", "RUB", "SAR", "SGD", "ZAR", "LKR", "SEK", "CHF", "THB", "TTD"]
 NUM_BASE_CURRENCIES_TO_SELECT = 10
 START_YEAR = 2011
 START_MONTH = 5
@@ -53,7 +49,6 @@ def fetch_rates(c_date, base, output=False): #fetches data
 
 
 def threaded(start_date, end_date, base_currencies, output=False):#create threads to fetch data
-    """Creates and runs threads to fetch exchange rate data for a date range and list of base currencies."""
     threads = []
     current_date = start_date
     delta = timedelta(days=1)
